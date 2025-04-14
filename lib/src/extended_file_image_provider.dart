@@ -11,8 +11,8 @@ class ExtendedFileImageProvider extends FileImage
     double scale = 1.0,
     this.cacheRawData = false,
     this.imageCacheName,
-  }) : assert(!kIsWeb, 'not support on web'),
-       super(file, scale: scale);
+  })  : assert(!kIsWeb, 'not support on web'),
+        super(file, scale: scale);
 
   /// Whether cache raw data if you need to get raw data directly.
   /// For example, we need raw image data to edit,
@@ -31,8 +31,8 @@ class ExtendedFileImageProvider extends FileImage
       codec: _loadAsync(key, decode),
       scale: key.scale,
       debugLabel: key.file.path,
-      informationCollector:
-          () => <DiagnosticsNode>[ErrorDescription('Path: ${file.path}')],
+      informationCollector: () =>
+          <DiagnosticsNode>[ErrorDescription('Path: ${file.path}')],
     );
   }
 
@@ -62,8 +62,8 @@ class ExtendedFileImageProvider extends FileImage
       return (file.runtimeType == File)
           ? decode(await ui.ImmutableBuffer.fromFilePath(file.path))
           : decode(
-            await ui.ImmutableBuffer.fromUint8List(await file.readAsBytes()),
-          );
+              await ui.ImmutableBuffer.fromUint8List(await file.readAsBytes()),
+            );
     }
   }
 

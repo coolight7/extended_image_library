@@ -107,10 +107,9 @@ mixin ExtendedImageProvider<T extends Object> on ImageProvider<T> {
     }
     final ImageStreamCompleter? completer = imageCache.putIfAbsent(
       key,
-      () => loadImage(
-        key,
-        PaintingBinding.instance.instantiateImageCodecWithSize,
-      ),
+      () =>
+          loadImage(key, PaintingBinding.instance.instantiateImageCodecWithSize)
+            ..addEphemeralErrorListener((_, __) {}),
       onError: handleError,
     );
     if (completer != null) {
