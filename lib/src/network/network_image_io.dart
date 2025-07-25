@@ -367,7 +367,15 @@ class ExtendedNetworkImageProvider
   // the `Content-Length` HTTP header. We automatically uncompress the content
   // in our call to [consolidateHttpClientResponseBytes].
   static final HttpClient _sharedHttpClient =
-      HttpClient()..autoUncompress = false;
+      HttpClient(context: SecurityContext(withTrustedRoots: false))
+        ..autoUncompress = false
+        ..badCertificateCallback = (
+          X509Certificate cert,
+          String host,
+          int port,
+        ) {
+          return true;
+        };
 
   static HttpClient get httpClient {
     HttpClient client = _sharedHttpClient;
